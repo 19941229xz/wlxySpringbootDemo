@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.wlxy.example.dao.UserDao">
+
+
+    <!-- 动态条件查询 -->
+    <select id="getAllUser" parameterType="User" resultType="User">
+        SELECT * FROM user
+        <where>
+            <if test=" id !=null and id !='' ">
+                and id=#{id}
+            </if>
+
+            <if test=" userName !=null and userName !='' ">
+                and userName=#{userName}
+            </if>
+
+            <if test=" password !=null and password !='' ">
+                and password=#{password}
+            </if>
+
+            <if test=" roleId !=null and roleId !='' ">
+                and roleId=#{roleId}
+            </if>
+        </where>
+
+    </select>
+
+    <insert parameterType="User" id="addUser">
+
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test=" userName !=null and userName !='' ">
+                userName,
+            </if>
+
+            <if test=" password !=null and password !='' ">
+                password,
+            </if>
+
+            <if test=" roleId !=null and roleId !='' ">
+                roleId,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+
+            <if test=" userName !=null and userName !='' ">
+                #{userName},
+            </if>
+
+            <if test=" password !=null and password !='' ">
+                #{password},
+            </if>
+
+            <if test=" roleId !=null and roleId !='' ">
+                #{roleId},
+            </if>
+        </trim>
+
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+
+    <update parameterType="User" id="updateUser">
+        update user set
+
+        <trim suffixOverrides=",">
+            <if test=" id !=null and id !='' ">
+                id=#{id},
+            </if>
+
+            <if test=" userName !=null and userName !='' ">
+                userName=#{userName},
+            </if>
+
+            <if test=" password !=null and password !='' ">
+                password=#{password},
+            </if>
+
+            <if test=" roleId !=null and roleId !='' ">
+                roleId=#{roleId},
+            </if>
+
+        </trim>
+        where id=#{id}
+
+    </update>
+
+    <delete id="removeUserById" parameterType="int">
+
+        delete from user where id=#{id}
+
+    </delete>
+
+
+
+    <!--    <select id="queryById" resultType="BookInfo">-->
+    <!--        select * from book_info where bookId=#{xxx};-->
+    <!--    </select>-->
+
+    <!--    <insert id="addBook">-->
+    <!--        insert into book_info values(null ,#{bookCode},#{bookName},#{bookType.id},#{bookAuthor},#{publishPress},#{publishDate},#{isBorrow})-->
+    <!--    </insert>-->
+
+    <!--    <delete id="deleteById">-->
+    <!--        delete from book_info where bookId=#{xxx}-->
+    <!--    </delete>-->
+
+    <!--    <update id="updateById">-->
+    <!--        UPDATE `book_info` SET bookCode=#{bookCode},bookName=#{bookName},bookType=#{bookType.id},bookAuthor=#{bookAuthor},publishPress=#{publishPress},publishDate=#{publishDate},isBorrow=#{isBorrow} WHERE `bookId`=#{bookId}-->
+    <!--    </update>-->
+</mapper>

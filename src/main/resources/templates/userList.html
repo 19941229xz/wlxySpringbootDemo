@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>springboot-thymeleaf demo</title>
+</head>
+
+<body>
+
+<ul>
+
+<!--    <li th:for="item in userList">-->
+<!--        ${item.id}-${item.userName}-${item.password}-->
+<!--    </li>-->
+
+    <li th:each="item,userStat:${userList}">
+        <a th:text="${item.id}"></a>
+        <a th:text="${item.userName}"></a>
+        <a th:text="${item.password}"></a>
+
+<!--        ${item.id}-${item.userName}-${item.password}-->
+        </li>
+
+</ul>
+
+
+</body>
+</html>
