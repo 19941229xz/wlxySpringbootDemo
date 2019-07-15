@@ -58,8 +58,7 @@ public class UserServiceImpl implements UserService {
 //        }
         user.setRoleId("general");
         userDao.addUser(user);
-        
-//        log.info(user.getId()+"");
+
 
         return userDao.getUserById(user.getId());
     }
