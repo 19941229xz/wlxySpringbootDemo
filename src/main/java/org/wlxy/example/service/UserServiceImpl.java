@@ -80,4 +80,49 @@ public class UserServiceImpl implements UserService {
         log.info("走的是数据库查询");
         return userDao.getUserById(id);
     }
+
+    @Override
+    public User login(String userName, String password) {
+
+        if(StringUtils.isEmpty(userName)||StringUtils.isEmpty(password)){
+            throw new MyException(HttpCode.ERROR).msg("用户名或密码不能为空");
+        }
+
+        User condition=new User();
+        condition.setUserName(userName);
+        condition.setPassword(password);
+
+        List<User> userList=userDao.getAllUser(condition);
+        User user=null;
+        if(userList.size()!=0){
+            user=userList.get(0);
+        }
+
+        return user;
+    }
+
+    @Override
+    public User register(User user) {
+        user.setIsActive(0);
+        user.setRoleId("general");
+
+
+
+        userDao.addUser(user);
+
+
+        return userDao.getUserById(user.getId());
+    }
+
+    @Override
+    public User userNameIsReged(String userName) {
+
+        return userDao.getUserByUserName(userName);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+
+        return userDao.getUserByEmail(email);
+    }
 }

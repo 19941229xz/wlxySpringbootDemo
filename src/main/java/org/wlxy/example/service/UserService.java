@@ -3,7 +3,6 @@ package org.wlxy.example.service;
 import org.wlxy.example.common.PageParam;
 import org.wlxy.example.model.User;
 
-import java.util.List;
 
 public interface UserService {
 
@@ -16,4 +15,12 @@ public interface UserService {
     boolean updateUser(User user);
 
     User getUserById(int id);
+
+    User login(String userName,String password);
+
+    User register(User user);
+
+    User userNameIsReged(String userName);
+
+    User getUserByEmail(String email);
 }

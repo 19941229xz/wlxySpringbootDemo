@@ -14,14 +14,17 @@ import javax.validation.Valid;
 @Api(value = "user模块接口",description = "这是一个用户模块的接口文档")
 @RestController
 @Slf4j
+@CrossOrigin
 public class UserController {
 
     @Autowired
     UserService userService;
 
 
-    @ApiOperation("查询所有用户 支持多条件查询")
+    @ApiOperation("查询所有用户 支持多条件分页排序查询")
     @PostMapping("/getAllUser")
+//    @RequiresRoles("admin")
+//    @RequiresPermissions("general")
 //    public Object getAllUser(@RequestBody(required = false) User u,@RequestBody Page page){
     public Object getAllUser(@RequestBody PageParam<User> pageParam){
 
@@ -48,6 +51,15 @@ public class UserController {
     @PutMapping("/updateUser")
     public Object updateUser(@RequestBody@Valid User user){
 
+//        User u = new User();
+//        u.setId(user.getId());
+//        u.setPassword(user.getPassword());
+//        u.setDeliveryAddress(user.getDeliveryAddress());
+//        u.setEmail(user.getEmail());
+//        u.setHeadPic(user.getHeadPic());
+        user.setUserName(null);
+        User u = userService.getUserById(user.getId());
+        user.setIsActive(u.getIsActive());
         return userService.updateUser(user)?MyRsp.success(null)
                 .msg("修改成功"):MyRsp.error().msg("修改失败");
     }

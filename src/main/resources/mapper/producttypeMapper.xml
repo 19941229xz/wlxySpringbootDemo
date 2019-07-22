@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.wlxy.example.dao.ProducttypeDao">
+	<!-- 动态条件查询producttype -->
+	<select id="getAllProducttype" parameterType="Producttype" resultType="Producttype">SELECT * FROM producttype
+		<where>
+			<!-- 主键id -->
+			<if test=" id !=null and id !='' ">and id=#{id}</if>
+			<!-- 商品分类名称 -->
+			<if test=" producttypeName !=null and producttypeName !='' ">and producttypeName=#{producttypeName}</if>
+			<!-- 浏览量 -->
+			<if test=" viewNum !=null and viewNum !='' ">and viewNum=#{viewNum}</if>
+			<!-- 商品分类图片 -->
+			<if test=" typeImg !=null and typeImg !='' ">and typeImg=#{typeImg}</if>
+			<!-- 创建时间 -->
+			<if test=" createTime !=null and createTime !='' ">and createTime=#{createTime}</if>
+			<!-- 商品分类描述 -->
+			<if test=" miaoshu !=null and miaoshu !='' ">and miaoshu=#{miaoshu}</if>
+		</where>
+	</select>
+	<!-- 动态保存producttype -->
+	<insert parameterType="Producttype" id="addProducttype">INSERT INTO producttype
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<!-- 主键id -->
+			<if test=" id !=null and id !='' ">id,</if>
+			<!-- 商品分类名称 -->
+			<if test=" producttypeName !=null and producttypeName !='' ">producttypeName,</if>
+			<!-- 浏览量 -->
+			<if test=" viewNum !=null and viewNum !='' ">viewNum,</if>
+			<!-- 商品分类图片 -->
+			<if test=" typeImg !=null and typeImg !='' ">typeImg,</if>
+			<!-- 创建时间 -->
+			<if test=" createTime !=null and createTime !='' ">createTime,</if>
+			<!-- 商品分类描述 -->
+			<if test=" miaoshu !=null and miaoshu !='' ">miaoshu,</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<!-- 主键id -->
+			<if test=" id !=null and id !='' ">#{id},</if>
+			<!-- 商品分类名称 -->
+			<if test=" producttypeName !=null and producttypeName !='' ">#{producttypeName},</if>
+			<!-- 浏览量 -->
+			<if test=" viewNum !=null and viewNum !='' ">#{viewNum},</if>
+			<!-- 商品分类图片 -->
+			<if test=" typeImg !=null and typeImg !='' ">#{typeImg},</if>
+			<!-- 创建时间 -->
+			<if test=" createTime !=null and createTime !='' ">#{createTime},</if>
+			<!-- 商品分类描述 -->
+			<if test=" miaoshu !=null and miaoshu !='' ">#{miaoshu},</if>
+		</trim>
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey>
+	</insert>
+	<!-- 动态更新producttype -->
+	<update id="updateProducttype" parameterType="Producttype">update producttype set
+		<trim suffixOverrides=",">
+			<!-- 主键id -->
+			<if test=" id !=null and id !='' ">id=#{id},</if>
+			<!-- 商品分类名称 -->
+			<if test=" producttypeName !=null and producttypeName !='' ">producttypeName=#{producttypeName},</if>
+			<!-- 浏览量 -->
+			<if test=" viewNum !=null and viewNum !='' ">viewNum=#{viewNum},</if>
+			<!-- 商品分类图片 -->
+			<if test=" typeImg !=null and typeImg !='' ">typeImg=#{typeImg},</if>
+			<!-- 创建时间 -->
+			<if test=" createTime !=null and createTime !='' ">createTime=#{createTime},</if>
+			<!-- 商品分类描述 -->
+			<if test=" miaoshu !=null and miaoshu !='' ">miaoshu=#{miaoshu},</if>
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>
