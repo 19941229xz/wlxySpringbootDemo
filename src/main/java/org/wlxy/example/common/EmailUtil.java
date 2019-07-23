@@ -6,6 +6,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import java.util.Random;
 
 public class EmailUtil {
 
@@ -62,6 +63,7 @@ public class EmailUtil {
 
 
     public static void main(String[] args) throws Exception {
-        sendEmail("123456","276819708@qq.com");
+//        sendEmail("123456","276819708@qq.com");
+        System.out.println(new Random().nextInt(6)+1);
     }
 }

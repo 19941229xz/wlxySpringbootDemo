@@ -21,8 +21,8 @@ public class Product implements Serializable {
     // 正常情况时的价格
     @ApiModelProperty(value = "正常情况时的价格" ,name = "normalPrice")
     private Double normalPrice;
-    //
-    @ApiModelProperty(value = "" ,name = "discount")
+    // 折扣价格
+    @ApiModelProperty(value = "折扣价格" ,name = "discount")
     private Double discount;
     // 是否参与折扣活动 1参加 0不参加
     @ApiModelProperty(value = "是否参与折扣活动 1参加 0不参加" ,name = "isInDiscount")
@@ -54,5 +54,11 @@ public class Product implements Serializable {
     // 下单数
     @ApiModelProperty(value = "下单数" ,name = "orderCount")
     private Integer orderCount;
+    // 快递费用
+    @ApiModelProperty(value = "快递费用" ,name = "deliveryPrice")
+    private Double deliveryPrice;
+    // 发货地址
+    @ApiModelProperty(value = "发货地址" ,name = "deliveryPlace")
+    private String deliveryPlace;
 
 }

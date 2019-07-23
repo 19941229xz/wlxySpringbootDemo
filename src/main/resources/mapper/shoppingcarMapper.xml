@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.wlxy.example.dao.ProductDao">
-	<!-- 动态条件查询product -->
-	<select id="getAllProduct" parameterType="Product" resultType="Product">SELECT * FROM product
+<mapper namespace="org.wlxy.example.dao.ShoppingcarDao">
+	<!-- 动态条件查询shoppingcar -->
+	<select id="getAllShoppingcar" parameterType="Shoppingcar" resultType="Shoppingcar">SELECT * FROM shoppingcar
 		<where>
 			<!-- 主键id -->
 			<if test=" id !=null and id !='' ">and id=#{id}</if>
+			<!-- 商品id -->
+			<if test=" productId !=null and productId !='' ">and productId=#{productId}</if>
+			<!-- 用户id -->
+			<if test=" userId !=null and userId !='' ">and userId=#{userId}</if>
 			<!-- 商品名称 -->
 			<if test=" productName !=null and productName !='' ">and productName=#{productName}</if>
 			<!-- 正常情况时的价格 -->
 			<if test=" normalPrice !=null and normalPrice !='' ">and normalPrice=#{normalPrice}</if>
 			<!-- 折扣价格 -->
 			<if test=" discount !=null and discount !='' ">and discount=#{discount}</if>
-			<!-- 是否参与折扣活动 1参加 0不参加 -->
+			<!-- 是否参与折扣活动 2参加 1不参加 -->
 			<if test=" isInDiscount !=null and isInDiscount !='' ">and isInDiscount=#{isInDiscount}</if>
 			<!-- 商品分类id -->
 			<if test=" typeId !=null and typeId !='' ">and typeId=#{typeId}</if>
 			<!-- 上架时间 -->
 			<if test=" createTime !=null and createTime !='' ">and createTime=#{createTime}</if>
-			<!-- 是否参与秒杀活动 1参加 0不参加 -->
+			<!-- 是否参与秒杀活动 2参加 1不参加 -->
 			<if test=" isInKill !=null and isInKill !='' ">and isInKill=#{isInKill}</if>
 			<!-- 秒杀的折扣 -->
 			<if test=" killDiscount !=null and killDiscount !='' ">and killDiscount=#{killDiscount}</if>
@@ -37,26 +41,32 @@
 			<if test=" deliveryPrice !=null and deliveryPrice !='' ">and deliveryPrice=#{deliveryPrice}</if>
 			<!-- 发货地址 -->
 			<if test=" deliveryPlace !=null and deliveryPlace !='' ">and deliveryPlace=#{deliveryPlace}</if>
+			<!-- 商品购买件数 -->
+			<if test=" productNum !=null and productNum !='' ">and productNum=#{productNum}</if>
 		</where>
 	</select>
-	<!-- 动态保存product -->
-	<insert parameterType="Product" id="addProduct">INSERT INTO product
+	<!-- 动态保存shoppingcar -->
+	<insert parameterType="Shoppingcar" id="addShoppingcar">INSERT INTO shoppingcar
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<!-- 主键id -->
 			<if test=" id !=null and id !='' ">id,</if>
+			<!-- 商品id -->
+			<if test=" productId !=null and productId !='' ">productId,</if>
+			<!-- 用户id -->
+			<if test=" userId !=null and userId !='' ">userId,</if>
 			<!-- 商品名称 -->
 			<if test=" productName !=null and productName !='' ">productName,</if>
 			<!-- 正常情况时的价格 -->
 			<if test=" normalPrice !=null and normalPrice !='' ">normalPrice,</if>
 			<!-- 折扣价格 -->
 			<if test=" discount !=null and discount !='' ">discount,</if>
-			<!-- 是否参与折扣活动 1参加 0不参加 -->
+			<!-- 是否参与折扣活动 2参加 1不参加 -->
 			<if test=" isInDiscount !=null and isInDiscount !='' ">isInDiscount,</if>
 			<!-- 商品分类id -->
 			<if test=" typeId !=null and typeId !='' ">typeId,</if>
 			<!-- 上架时间 -->
 			<if test=" createTime !=null and createTime !='' ">createTime,</if>
-			<!-- 是否参与秒杀活动 1参加 0不参加 -->
+			<!-- 是否参与秒杀活动 2参加 1不参加 -->
 			<if test=" isInKill !=null and isInKill !='' ">isInKill,</if>
 			<!-- 秒杀的折扣 -->
 			<if test=" killDiscount !=null and killDiscount !='' ">killDiscount,</if>
@@ -74,23 +84,29 @@
 			<if test=" deliveryPrice !=null and deliveryPrice !='' ">deliveryPrice,</if>
 			<!-- 发货地址 -->
 			<if test=" deliveryPlace !=null and deliveryPlace !='' ">deliveryPlace,</if>
+			<!-- 商品购买件数 -->
+			<if test=" productNum !=null and productNum !='' ">productNum,</if>
 		</trim>
 		<trim prefix="values(" suffix=")" suffixOverrides=",">
 			<!-- 主键id -->
 			<if test=" id !=null and id !='' ">#{id},</if>
+			<!-- 商品id -->
+			<if test=" productId !=null and productId !='' ">#{productId},</if>
+			<!-- 用户id -->
+			<if test=" userId !=null and userId !='' ">#{userId},</if>
 			<!-- 商品名称 -->
 			<if test=" productName !=null and productName !='' ">#{productName},</if>
 			<!-- 正常情况时的价格 -->
 			<if test=" normalPrice !=null and normalPrice !='' ">#{normalPrice},</if>
 			<!-- 折扣价格 -->
 			<if test=" discount !=null and discount !='' ">#{discount},</if>
-			<!-- 是否参与折扣活动 1参加 0不参加 -->
+			<!-- 是否参与折扣活动 2参加 1不参加 -->
 			<if test=" isInDiscount !=null and isInDiscount !='' ">#{isInDiscount},</if>
 			<!-- 商品分类id -->
 			<if test=" typeId !=null and typeId !='' ">#{typeId},</if>
 			<!-- 上架时间 -->
 			<if test=" createTime !=null and createTime !='' ">#{createTime},</if>
-			<!-- 是否参与秒杀活动 1参加 0不参加 -->
+			<!-- 是否参与秒杀活动 2参加 1不参加 -->
 			<if test=" isInKill !=null and isInKill !='' ">#{isInKill},</if>
 			<!-- 秒杀的折扣 -->
 			<if test=" killDiscount !=null and killDiscount !='' ">#{killDiscount},</if>
@@ -108,27 +124,33 @@
 			<if test=" deliveryPrice !=null and deliveryPrice !='' ">#{deliveryPrice},</if>
 			<!-- 发货地址 -->
 			<if test=" deliveryPlace !=null and deliveryPlace !='' ">#{deliveryPlace},</if>
+			<!-- 商品购买件数 -->
+			<if test=" productNum !=null and productNum !='' ">#{productNum},</if>
 		</trim>
 		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey>
 	</insert>
-	<!-- 动态更新product -->
-	<update id="updateProduct" parameterType="Product">update product set
+	<!-- 动态更新shoppingcar -->
+	<update id="updateShoppingcar" parameterType="Shoppingcar">update shoppingcar set
 		<trim suffixOverrides=",">
 			<!-- 主键id -->
 			<if test=" id !=null and id !='' ">id=#{id},</if>
+			<!-- 商品id -->
+			<if test=" productId !=null and productId !='' ">productId=#{productId},</if>
+			<!-- 用户id -->
+			<if test=" userId !=null and userId !='' ">userId=#{userId},</if>
 			<!-- 商品名称 -->
 			<if test=" productName !=null and productName !='' ">productName=#{productName},</if>
 			<!-- 正常情况时的价格 -->
 			<if test=" normalPrice !=null and normalPrice !='' ">normalPrice=#{normalPrice},</if>
 			<!-- 折扣价格 -->
 			<if test=" discount !=null and discount !='' ">discount=#{discount},</if>
-			<!-- 是否参与折扣活动 1参加 0不参加 -->
+			<!-- 是否参与折扣活动 2参加 1不参加 -->
 			<if test=" isInDiscount !=null and isInDiscount !='' ">isInDiscount=#{isInDiscount},</if>
 			<!-- 商品分类id -->
 			<if test=" typeId !=null and typeId !='' ">typeId=#{typeId},</if>
 			<!-- 上架时间 -->
-			<if test=" createTime !=null ">createTime=#{createTime},</if>
-			<!-- 是否参与秒杀活动 1参加 0不参加 -->
+			<if test=" createTime !=null and createTime !='' ">createTime=#{createTime},</if>
+			<!-- 是否参与秒杀活动 2参加 1不参加 -->
 			<if test=" isInKill !=null and isInKill !='' ">isInKill=#{isInKill},</if>
 			<!-- 秒杀的折扣 -->
 			<if test=" killDiscount !=null and killDiscount !='' ">killDiscount=#{killDiscount},</if>
@@ -146,6 +168,8 @@
 			<if test=" deliveryPrice !=null and deliveryPrice !='' ">deliveryPrice=#{deliveryPrice},</if>
 			<!-- 发货地址 -->
 			<if test=" deliveryPlace !=null and deliveryPlace !='' ">deliveryPlace=#{deliveryPlace},</if>
+			<!-- 商品购买件数 -->
+			<if test=" productNum !=null and productNum !='' ">productNum=#{productNum},</if>
 		</trim> WHERE id = #{id}
 	</update>
 </mapper>
