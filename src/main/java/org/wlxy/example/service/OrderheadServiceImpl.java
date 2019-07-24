@@ -37,6 +37,9 @@ public class OrderheadServiceImpl implements OrderheadService {
 	@Autowired
     OrderdetailService orderdetailService;
 
+    @Autowired
+    ShoppingcarService shoppingcarService;
+
 	@Override
     @Transactional(readOnly = true)
 	public Object getAllOrderhead(PageParam<Orderhead> pageParam){
@@ -99,9 +102,14 @@ public class OrderheadServiceImpl implements OrderheadService {
         double totalPrice=0.0;
         int userId=shoppingcarList.get(0).getUserId();
 
+        //订单表头数据  初始化
+        Orderhead orderhead = new Orderhead();
+
         Product product;//临时存放  商品数据
         double discount;
         double killDiscount;
+        double discountTotal=0;
+        double killDiscountTotal=0;
         for(Shoppingcar shoppingcar:shoppingcarList){
             totalProductCount+=shoppingcar.getProductNum();
 
@@ -119,12 +127,16 @@ public class OrderheadServiceImpl implements OrderheadService {
             killDiscount=product.getIsInKill()==2?product.getKillDiscount():0;
 
 
+            //计算总折扣
+            discountTotal+=discount*shoppingcar.getProductNum();
+            killDiscountTotal+=killDiscount*shoppingcar.getProductNum();
 
             totalPrice+=(product.getNormalPrice()-discount-killDiscount)*shoppingcar.getProductNum();
         }
 
         // 添加订单表头到数据库
-        Orderhead orderhead = new Orderhead();
+        orderhead.setKillDiscount(killDiscountTotal);
+        orderhead.setDiscount(discountTotal);
         orderhead.setFirstProductImg(firstProductImg);
         orderhead.setFirstProductName(firstProductName);
         orderhead.setTotalPrice(totalPrice);
@@ -170,6 +182,12 @@ public class OrderheadServiceImpl implements OrderheadService {
         if(successInsert!=shoppingcarList.size()){
             throw new MyException(HttpCode.ERROR).msg("订单详情数据录入不完整");
         }
+
+        //订单生成成功  需要清空已被结算的购物车的商品
+        for(Shoppingcar shoppingcar:shoppingcarList){
+            shoppingcarService.removeShoppingcarById(shoppingcar.getId());
+        }
+
 
         return orderheadDao.getOrderheadById(orderhead.getId());
     }
