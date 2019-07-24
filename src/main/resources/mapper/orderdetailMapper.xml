@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.wlxy.example.dao.OrderdetailDao">
+	<!-- 动态条件查询orderdetail -->
+	<select id="getAllOrderdetail" parameterType="Orderdetail" resultType="Orderdetail">SELECT * FROM orderdetail
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 商品id -->  
+			<if test=" productId !=null and productId !='' ">and productId=#{productId}</if>  
+			<!-- 订单表头id -->  
+			<if test=" orderId !=null and orderId !='' ">and orderId=#{orderId}</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">and userId=#{userId}</if>  
+			<!-- 商品名称 -->  
+			<if test=" productName !=null and productName !='' ">and productName=#{productName}</if>  
+			<!-- 正常情况时的价格 -->  
+			<if test=" normalPrice !=null and normalPrice !='' ">and normalPrice=#{normalPrice}</if>  
+			<!-- 折扣价格 -->  
+			<if test=" discount !=null and discount !='' ">and discount=#{discount}</if>  
+			<!-- 是否参与折扣活动 2参加 1不参加 -->  
+			<if test=" isInDiscount !=null and isInDiscount !='' ">and isInDiscount=#{isInDiscount}</if>  
+			<!-- 商品分类id -->  
+			<if test=" typeId !=null and typeId !='' ">and typeId=#{typeId}</if>  
+			<!-- 上架时间 -->  
+			<if test=" createTime !=null and createTime !='' ">and createTime=#{createTime}</if>  
+			<!-- 是否参与秒杀活动 2参加 1不参加 -->  
+			<if test=" isInKill !=null and isInKill !='' ">and isInKill=#{isInKill}</if>  
+			<!-- 秒杀的折扣 -->  
+			<if test=" killDiscount !=null and killDiscount !='' ">and killDiscount=#{killDiscount}</if>  
+			<!-- 商品图片 -->  
+			<if test=" productImg !=null and productImg !='' ">and productImg=#{productImg}</if>  
+			<!-- 浏览量 -->  
+			<if test=" viewNum !=null and viewNum !='' ">and viewNum=#{viewNum}</if>  
+			<!-- 库存量 -->  
+			<if test=" deserveNum !=null and deserveNum !='' ">and deserveNum=#{deserveNum}</if>  
+			<!-- 商品描述 -->  
+			<if test=" miaoshu !=null and miaoshu !='' ">and miaoshu=#{miaoshu}</if>  
+			<!-- 下单数 -->  
+			<if test=" orderCount !=null and orderCount !='' ">and orderCount=#{orderCount}</if>  
+			<!-- 快递费用 -->  
+			<if test=" deliveryPrice !=null and deliveryPrice !='' ">and deliveryPrice=#{deliveryPrice}</if>  
+			<!-- 发货地址 -->  
+			<if test=" deliveryPlace !=null and deliveryPlace !='' ">and deliveryPlace=#{deliveryPlace}</if>  
+			<!-- 商品购买件数 -->  
+			<if test=" productNum !=null and productNum !='' ">and productNum=#{productNum}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存orderdetail -->
+	<insert parameterType="Orderdetail" id="addOrderdetail">INSERT INTO orderdetail
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 商品id -->  
+			<if test=" productId !=null and productId !='' ">productId,</if>  
+			<!-- 订单表头id -->  
+			<if test=" orderId !=null and orderId !='' ">orderId,</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">userId,</if>  
+			<!-- 商品名称 -->  
+			<if test=" productName !=null and productName !='' ">productName,</if>  
+			<!-- 正常情况时的价格 -->  
+			<if test=" normalPrice !=null and normalPrice !='' ">normalPrice,</if>  
+			<!-- 折扣价格 -->  
+			<if test=" discount !=null and discount !='' ">discount,</if>  
+			<!-- 是否参与折扣活动 2参加 1不参加 -->  
+			<if test=" isInDiscount !=null and isInDiscount !='' ">isInDiscount,</if>  
+			<!-- 商品分类id -->  
+			<if test=" typeId !=null and typeId !='' ">typeId,</if>  
+			<!-- 上架时间 -->  
+			<if test=" createTime !=null and createTime !='' ">createTime,</if>  
+			<!-- 是否参与秒杀活动 2参加 1不参加 -->  
+			<if test=" isInKill !=null and isInKill !='' ">isInKill,</if>  
+			<!-- 秒杀的折扣 -->  
+			<if test=" killDiscount !=null and killDiscount !='' ">killDiscount,</if>  
+			<!-- 商品图片 -->  
+			<if test=" productImg !=null and productImg !='' ">productImg,</if>  
+			<!-- 浏览量 -->  
+			<if test=" viewNum !=null and viewNum !='' ">viewNum,</if>  
+			<!-- 库存量 -->  
+			<if test=" deserveNum !=null and deserveNum !='' ">deserveNum,</if>  
+			<!-- 商品描述 -->  
+			<if test=" miaoshu !=null and miaoshu !='' ">miaoshu,</if>  
+			<!-- 下单数 -->  
+			<if test=" orderCount !=null and orderCount !='' ">orderCount,</if>  
+			<!-- 快递费用 -->  
+			<if test=" deliveryPrice !=null and deliveryPrice !='' ">deliveryPrice,</if>  
+			<!-- 发货地址 -->  
+			<if test=" deliveryPlace !=null and deliveryPlace !='' ">deliveryPlace,</if>  
+			<!-- 商品购买件数 -->  
+			<if test=" productNum !=null and productNum !='' ">productNum,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 商品id -->  
+			<if test=" productId !=null and productId !='' ">#{productId},</if>  
+			<!-- 订单表头id -->  
+			<if test=" orderId !=null and orderId !='' ">#{orderId},</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">#{userId},</if>  
+			<!-- 商品名称 -->  
+			<if test=" productName !=null and productName !='' ">#{productName},</if>  
+			<!-- 正常情况时的价格 -->  
+			<if test=" normalPrice !=null and normalPrice !='' ">#{normalPrice},</if>  
+			<!-- 折扣价格 -->  
+			<if test=" discount !=null and discount !='' ">#{discount},</if>  
+			<!-- 是否参与折扣活动 2参加 1不参加 -->  
+			<if test=" isInDiscount !=null and isInDiscount !='' ">#{isInDiscount},</if>  
+			<!-- 商品分类id -->  
+			<if test=" typeId !=null and typeId !='' ">#{typeId},</if>  
+			<!-- 上架时间 -->  
+			<if test=" createTime !=null and createTime !='' ">#{createTime},</if>  
+			<!-- 是否参与秒杀活动 2参加 1不参加 -->  
+			<if test=" isInKill !=null and isInKill !='' ">#{isInKill},</if>  
+			<!-- 秒杀的折扣 -->  
+			<if test=" killDiscount !=null and killDiscount !='' ">#{killDiscount},</if>  
+			<!-- 商品图片 -->  
+			<if test=" productImg !=null and productImg !='' ">#{productImg},</if>  
+			<!-- 浏览量 -->  
+			<if test=" viewNum !=null and viewNum !='' ">#{viewNum},</if>  
+			<!-- 库存量 -->  
+			<if test=" deserveNum !=null and deserveNum !='' ">#{deserveNum},</if>  
+			<!-- 商品描述 -->  
+			<if test=" miaoshu !=null and miaoshu !='' ">#{miaoshu},</if>  
+			<!-- 下单数 -->  
+			<if test=" orderCount !=null and orderCount !='' ">#{orderCount},</if>  
+			<!-- 快递费用 -->  
+			<if test=" deliveryPrice !=null and deliveryPrice !='' ">#{deliveryPrice},</if>  
+			<!-- 发货地址 -->  
+			<if test=" deliveryPlace !=null and deliveryPlace !='' ">#{deliveryPlace},</if>  
+			<!-- 商品购买件数 -->  
+			<if test=" productNum !=null and productNum !='' ">#{productNum},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新orderdetail -->
+	<update id="updateOrderdetail" parameterType="Orderdetail">update orderdetail set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 商品id -->  
+			<if test=" productId !=null and productId !='' ">productId=#{productId},</if>  
+			<!-- 订单表头id -->  
+			<if test=" orderId !=null and orderId !='' ">orderId=#{orderId},</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">userId=#{userId},</if>  
+			<!-- 商品名称 -->  
+			<if test=" productName !=null and productName !='' ">productName=#{productName},</if>  
+			<!-- 正常情况时的价格 -->  
+			<if test=" normalPrice !=null and normalPrice !='' ">normalPrice=#{normalPrice},</if>  
+			<!-- 折扣价格 -->  
+			<if test=" discount !=null and discount !='' ">discount=#{discount},</if>  
+			<!-- 是否参与折扣活动 2参加 1不参加 -->  
+			<if test=" isInDiscount !=null and isInDiscount !='' ">isInDiscount=#{isInDiscount},</if>  
+			<!-- 商品分类id -->  
+			<if test=" typeId !=null and typeId !='' ">typeId=#{typeId},</if>  
+			<!-- 上架时间 -->  
+			<if test=" createTime !=null and createTime !='' ">createTime=#{createTime},</if>  
+			<!-- 是否参与秒杀活动 2参加 1不参加 -->  
+			<if test=" isInKill !=null and isInKill !='' ">isInKill=#{isInKill},</if>  
+			<!-- 秒杀的折扣 -->  
+			<if test=" killDiscount !=null and killDiscount !='' ">killDiscount=#{killDiscount},</if>  
+			<!-- 商品图片 -->  
+			<if test=" productImg !=null and productImg !='' ">productImg=#{productImg},</if>  
+			<!-- 浏览量 -->  
+			<if test=" viewNum !=null and viewNum !='' ">viewNum=#{viewNum},</if>  
+			<!-- 库存量 -->  
+			<if test=" deserveNum !=null and deserveNum !='' ">deserveNum=#{deserveNum},</if>  
+			<!-- 商品描述 -->  
+			<if test=" miaoshu !=null and miaoshu !='' ">miaoshu=#{miaoshu},</if>  
+			<!-- 下单数 -->  
+			<if test=" orderCount !=null and orderCount !='' ">orderCount=#{orderCount},</if>  
+			<!-- 快递费用 -->  
+			<if test=" deliveryPrice !=null and deliveryPrice !='' ">deliveryPrice=#{deliveryPrice},</if>  
+			<!-- 发货地址 -->  
+			<if test=" deliveryPlace !=null and deliveryPlace !='' ">deliveryPlace=#{deliveryPlace},</if>  
+			<!-- 商品购买件数 -->  
+			<if test=" productNum !=null and productNum !='' ">productNum=#{productNum},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

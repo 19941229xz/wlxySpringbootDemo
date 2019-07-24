@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserById(user.getId());
     }
 
+    @CacheEvict(value = "users",key = "#p0.id")
     @Override
     public boolean updateUser(User user) {
 

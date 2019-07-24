@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.wlxy.example.dao.OrderheadDao">
+	<!-- 动态条件查询orderhead -->
+	<select id="getAllOrderhead" parameterType="Orderhead" resultType="Orderhead">SELECT * FROM orderhead
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 订单商品总件数 -->  
+			<if test=" totalProductCount !=null and totalProductCount !='' ">and totalProductCount=#{totalProductCount}</if>  
+			<!-- 订单第一件商品的名称 -->  
+			<if test=" firstProductName !=null and firstProductName !='' ">and firstProductName=#{firstProductName}</if>  
+			<!-- 订单第一件商品的图片 -->  
+			<if test=" firstProductImg !=null and firstProductImg !='' ">and firstProductImg=#{firstProductImg}</if>  
+			<!-- 订单商品总价（含运费） -->  
+			<if test=" totalPrice !=null and totalPrice !='' ">and totalPrice=#{totalPrice}</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">and userId=#{userId}</if>  
+			<!-- 订单创建时间 -->  
+			<if test=" createTime !=null and createTime !='' ">and createTime=#{createTime}</if>  
+			<!-- 订单状态 -->  
+			<if test=" state !=null and state !='' ">and state=#{state}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存orderhead -->
+	<insert parameterType="Orderhead" id="addOrderhead">INSERT INTO orderhead
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 订单商品总件数 -->  
+			<if test=" totalProductCount !=null and totalProductCount !='' ">totalProductCount,</if>  
+			<!-- 订单第一件商品的名称 -->  
+			<if test=" firstProductName !=null and firstProductName !='' ">firstProductName,</if>  
+			<!-- 订单第一件商品的图片 -->  
+			<if test=" firstProductImg !=null and firstProductImg !='' ">firstProductImg,</if>  
+			<!-- 订单商品总价（含运费） -->  
+			<if test=" totalPrice !=null and totalPrice !='' ">totalPrice,</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">userId,</if>  
+			<!-- 订单创建时间 -->  
+			<if test=" createTime !=null and createTime !='' ">createTime,</if>  
+			<!-- 订单状态 -->  
+			<if test=" state !=null and state !='' ">state,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 订单商品总件数 -->  
+			<if test=" totalProductCount !=null and totalProductCount !='' ">#{totalProductCount},</if>  
+			<!-- 订单第一件商品的名称 -->  
+			<if test=" firstProductName !=null and firstProductName !='' ">#{firstProductName},</if>  
+			<!-- 订单第一件商品的图片 -->  
+			<if test=" firstProductImg !=null and firstProductImg !='' ">#{firstProductImg},</if>  
+			<!-- 订单商品总价（含运费） -->  
+			<if test=" totalPrice !=null and totalPrice !='' ">#{totalPrice},</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">#{userId},</if>  
+			<!-- 订单创建时间 -->  
+			<if test=" createTime !=null and createTime !='' ">#{createTime},</if>  
+			<!-- 订单状态 -->  
+			<if test=" state !=null and state !='' ">#{state},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新orderhead -->
+	<update id="updateOrderhead" parameterType="Orderhead">update orderhead set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 订单商品总件数 -->  
+			<if test=" totalProductCount !=null and totalProductCount !='' ">totalProductCount=#{totalProductCount},</if>  
+			<!-- 订单第一件商品的名称 -->  
+			<if test=" firstProductName !=null and firstProductName !='' ">firstProductName=#{firstProductName},</if>  
+			<!-- 订单第一件商品的图片 -->  
+			<if test=" firstProductImg !=null and firstProductImg !='' ">firstProductImg=#{firstProductImg},</if>  
+			<!-- 订单商品总价（含运费） -->  
+			<if test=" totalPrice !=null and totalPrice !='' ">totalPrice=#{totalPrice},</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">userId=#{userId},</if>  
+			<!-- 订单创建时间 -->  
+			<if test=" createTime !=null and createTime !='' ">createTime=#{createTime},</if>  
+			<!-- 订单状态 -->  
+			<if test=" state !=null and state !='' ">state=#{state},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

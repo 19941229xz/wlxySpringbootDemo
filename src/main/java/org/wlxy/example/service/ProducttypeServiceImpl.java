@@ -57,6 +57,7 @@ public class ProducttypeServiceImpl implements ProducttypeService {
         return producttypeDao.getProducttypeById(producttype.getId());
     }
 
+    @CacheEvict(value = "producttypes",key = "#p0.id")
 	@Override
     public boolean updateProducttype(Producttype producttype){
     	if(StringUtils.isEmpty(producttype.getId())){

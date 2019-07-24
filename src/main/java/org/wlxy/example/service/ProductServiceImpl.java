@@ -58,6 +58,7 @@ public class ProductServiceImpl implements ProductService {
         return productDao.getProductById(product.getId());
     }
 
+    @CacheEvict(value = "products",key = "#p0.id")
 	@Override
     public boolean updateProduct(Product product){
     	if(StringUtils.isEmpty(product.getId())){

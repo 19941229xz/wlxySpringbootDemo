@@ -58,6 +58,7 @@ public class ShoppingcarServiceImpl implements ShoppingcarService {
         return shoppingcarDao.getShoppingcarById(shoppingcar.getId());
     }
 
+    @CacheEvict(value = "shoppingcars",key = "#p0.id")
 	@Override
     public boolean updateShoppingcar(Shoppingcar shoppingcar){
     	if(StringUtils.isEmpty(shoppingcar.getId())){
