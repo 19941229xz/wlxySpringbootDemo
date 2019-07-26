@@ -1,6 +1,7 @@
 package org.wlxy.example.common.upload;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +17,8 @@ import java.io.IOException;
 @CrossOrigin
 public class UploadController {
 
-
+    @Value("${app.imgPath}")
+    private String imgPath;
 
     @PostMapping("/addImage")
     @ResponseBody
@@ -28,7 +30,7 @@ public class UploadController {
             try {
                 //图片命名
 //                String newCompanyImageName = "newPIC";
-                String newCompanyImagepath = "D:\\img\\"+file.getOriginalFilename();
+                String newCompanyImagepath = imgPath+file.getOriginalFilename();
                 File newFile = new File(newCompanyImagepath);
                 if (!newFile.exists()) {
                     newFile.createNewFile();
